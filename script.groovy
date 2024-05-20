@@ -76,7 +76,7 @@ def configureServers() {
     }
 
     withCredentials([sshUserPrivateKey(
-        credentialsId: 'ec2-server-key',
+        credentialsId: 'ansible-server-key',
         keyFileVariable: 'keyfile',
         usernameVariable: 'user'
     )]) {
