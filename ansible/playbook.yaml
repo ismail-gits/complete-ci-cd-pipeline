@@ -26,3 +26,45 @@
           - docker==6.1.3
           - docker-compose
         state: present
+
+- name: Make sure docker is started
+  hosts: aws_ec2
+  become: true
+  become_user: root
+  tasks:
+    - name: Start docker daemon
+      ansible.builtin.systemd:
+        name: docker
+        state: started
+
+- name: Add ec2-user to docker group
+  hosts: aws_ec2
+  become: true
+  become_user: root
+  tasks:
+    - name: Add ec2-user to docker group
+      ansible.builtin.user:
+        name: ec2-user
+        groups: docker
+        append: true
+    - name: Reconnect to server session
+      ansible.builtin.meta: reset_connection
+
+- name: Start docker containers
+  hosts: aws_ec2
+  vars_files: 
+    - playbook-vars.yaml
+  tasks:
+    - name: Copy docker-compose file to remote server
+      ansible.buildin.copy:
+        src: /var/jenkins_home/workspace/NodeJs-web-application_main/docker-compose.yaml
+        dest: /home/ec2-user/docker-compose.yaml
+    - name: Docker login to AWS ECR private registry
+      community.docker.docker_login:
+        registry_url: https://index.docker.io/v1/
+        username: AWS
+        password: "{{ docker_repo_password }}"
+    - name: Start docker containers using docker-compose
+      community.docker.docker_compose:
+        project_src: /home/ec2-user
+        state: present

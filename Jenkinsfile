@@ -12,6 +12,7 @@ pipeline {
     environment {
         DOCKER_REPOSITORY = "590183817498.dkr.ecr.ap-south-1.amazonaws.com"
         IMAGE_NAME = "590183817498.dkr.ecr.ap-south-1.amazonaws.com/nodejs-app"
+        ANSIBLE_SERVER = "3.108.217.6"
     }
 
     stages {
@@ -87,6 +88,19 @@ pipeline {
             steps {
                 script {
                     gv.provisionServer()
+                }
+            }
+        }
+
+        stage('configure server') {
+            when {
+                expression {
+                    BRANCH_NAME == 'main'
+                }
+            }
+            steps {
+                script {
+                    gv.configureServers()
                 }
             }
         }

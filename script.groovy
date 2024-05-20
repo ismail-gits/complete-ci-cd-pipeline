@@ -66,4 +66,32 @@ def provisionServer() {
     sleep(time: 60, unit: "SECONDS")
 }
 
+def configureServers() {
+    echo "executing ansible-playbook to configure servers..."
+
+    echo "copying all necessary files to ansible control node server"
+
+    sshagent(['ansible-server-key']) {
+        sh "scp -o StrictHostKeyChecking=no ansible/* ec2-user@${ANSIBLE_SERVER}:~/"
+    }
+
+    def remote = [:]
+    remote.name = "ansible"
+    remote.host = env.ANSIBLE_SERVER
+    remote.allowAnyHosts = true
+
+    withCredentials([sshUserPrivateKey(
+        credentialsId: 'ansible-server-key',
+        keyFileVariable: 'keyfile',
+        usernameVariable: 'user'
+    )]) {
+        remote.user = user
+        remote.identityFile = keyfile
+
+        sshCommand remote: remote, command: "ls -l"
+        sshScript remote: remote, script: "prepare-ansible-server.sh"
+        sshCommand remote: remote, command: "ansible-playbook playbook.yaml"
+    }
+}
+
 return this
