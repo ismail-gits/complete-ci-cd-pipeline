@@ -1,5 +1,9 @@
 def incrementVersion() {
     echo "Incrementing the application version..."
+
+    sh "git config --global user.email jenkins@gmail.com"
+    sh "git config --global user.name jenkins"
+    
     // Increment the version using npm
     sh "npm version patch"
     
