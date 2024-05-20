@@ -75,6 +75,14 @@ def configureServers() {
         sh "scp -o StrictHostKeyChecking=no ansible/* ec2-user@${ANSIBLE_SERVER}:~/"
     }
 
+    withCredentials([sshUserPrivateKey(
+        credentialsId: 'ec2-server-key',
+        keyFileVariable: 'keyfile',
+        usernameVariable: 'user'
+    )]) {
+        sh 'scp $keyfile ec2-user@$ANSIBLE_SERVER:~/ansible-jenkins.pem'
+    }
+
     def remote = [:]
     remote.name = "ansible"
     remote.host = env.ANSIBLE_SERVER
