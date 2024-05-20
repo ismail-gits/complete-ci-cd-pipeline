@@ -114,7 +114,7 @@ def versionBump() {
         usernameVariable: 'USER',
         passwordVariable: 'PASSWORD'
     )]) {
-        sh "git remote set-url origin https://$USER:$PASSWORD@gitlab.com/ismailGitlab/ci-cd-pipeline"
+        sh "git remote set-url origin https://$USER:$PASSWORD@<git-repo-url>"
     }
 
     sh "git add ."
