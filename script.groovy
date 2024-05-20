@@ -1,9 +1,15 @@
 def incrementVersion() {
-    echo "incrementing the application version..."
+    def incrementVersion() {
+    echo "Incrementing the application version..."
+    // Increment the version using npm
     sh "npm version patch"
-    def version = sh "jq -r '.version' package.json"
+    
+    // Read the updated version from package.json
+    def version = sh(script: 'cat package.json | jq -r ".version"', returnStdout: true).trim()
+    
     echo "Updated version: $version"
     env.IMAGE_VERSION = "$version-$BUILD_NUMBER"
+}
 }
 
 def installDependencies() {
