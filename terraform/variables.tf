@@ -5,10 +5,10 @@ variable subnet_cidr_block {
     default = "10.0.10.0/24"
 }
 variable availability_zone {
-    default = "us-east-2a"
+    default = "ap-south-1a"
 }
 variable region {
-    default = "us-east-2"
+    default = "ap-south-1"
 }
 variable image_name {
     default = "al2023-ami-*-x86_64"
