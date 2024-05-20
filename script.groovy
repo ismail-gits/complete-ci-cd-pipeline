@@ -1,5 +1,4 @@
 def incrementVersion() {
-    def incrementVersion() {
     echo "Incrementing the application version..."
     // Increment the version using npm
     sh "npm version patch"
@@ -9,7 +8,6 @@ def incrementVersion() {
     
     echo "Updated version: $version"
     env.IMAGE_VERSION = "$version-$BUILD_NUMBER"
-}
 }
 
 def installDependencies() {
