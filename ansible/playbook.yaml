@@ -57,11 +57,11 @@
   tasks:
     - name: Copy docker-compose file to remote server
       ansible.builtin.copy:
-        src: /var/jenkins_home/workspace/NodeJs-web-application_main/docker-compose.yaml
+        src: ~/docker-compose.yaml
         dest: /home/ec2-user/docker-compose.yaml
     - name: Docker login to AWS ECR private registry
       community.docker.docker_login:
-        registry_url: https://index.docker.io/v1/
+        registry_url: 590183817498.dkr.ecr.ap-south-1.amazonaws.com
         username: AWS
         password: "{{ docker_repo_password }}"
     - name: Start docker containers using docker-compose

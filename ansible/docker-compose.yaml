@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  nodejs-web-app:
+    image: 590183817498.dkr.ecr.ap-south-1.amazonaws.com/nodejs-app:latest
+    ports:
+      - 8080:8080
+    container_name: nodejs
