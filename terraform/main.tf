@@ -14,7 +14,7 @@ provider "aws" {
 resource "aws_vpc" "myapp-vpc" {
     cidr_block = var.vpc_cidr_block
     enable_dns_hostnames = true
-    
+
     tags = {
         Name: "${var.env_prefix}-vpc"
     }
@@ -62,7 +62,7 @@ resource "aws_security_group" "myapp-sg" {
         from_port = 22
         to_port = 22
         protocol = "tcp"
-        cidr_blocks = [var.my_ip]
+        cidr_blocks = ["0.0.0.0/0"]
     }
 
     ingress {
