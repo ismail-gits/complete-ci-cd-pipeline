@@ -37,7 +37,7 @@ def pushImageToECR() {
         usernameVariable: 'USER',
         passwordVariable: 'PASSWORD'
     )]) {
-        sh "docker login -u $USER -p $PASSWORD $DOCKER_REPOSITORY"
+        sh 'echo $PASSWORD | docker login -u $USER --password-stdin $DOCKER_REPOSITORY'
         sh "docker push $IMAGE_NAME:$IMAGE_VERSION"
         sh "docker push $IMAGE_NAME:latest"
     }
