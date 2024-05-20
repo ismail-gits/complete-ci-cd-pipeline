@@ -89,7 +89,7 @@ def configureServers() {
     remote.allowAnyHosts = true
 
     withCredentials([sshUserPrivateKey(
-        credentialsId: 'ansible-server-key',
+        credentialsId: 'ansible-server-key', 
         keyFileVariable: 'keyfile',
         usernameVariable: 'user'
     )]) {
