@@ -43,4 +43,27 @@ def pushImageToECR() {
     }
 }
 
+def provisionServer() {
+    echo "provisioning ec2 servers using terraform..."
+    dir("terraform") {
+        sh "terraform init"
+        sh "terraform apply --auto-approve"
+
+        env.SERVER_PUBLIC_IP_1 = sh(
+            script: "terraform output ec2_public_ip-1",
+            returnStdout: true
+        ).trim()
+        env.SERVER_PUBLIC_IP_2 = sh(
+            script: "terraform output ec2_public_ip-2",
+            returnStdout: true
+        ).trim()
+    }
+
+    echo "Server-1 public ip: $SERVER_PUBLIC_IP_1"
+    echo "Server-2 public ip: $SERVER_PUBLIC_IP_2"
+
+    echo "waiting for EC2 server to initialize..."
+    sleep(time: 60, unit: "SECONDS")
+}
+
 return this
