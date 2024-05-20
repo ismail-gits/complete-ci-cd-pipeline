@@ -24,6 +24,14 @@ pipeline {
             }
         }
 
+        stage('install dependencies') {
+            steps {
+                script {
+                    gv.installDependencies()
+                }
+            }
+        }
+
         stage('increment version') {
             steps {
                 script {
