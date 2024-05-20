@@ -74,13 +74,13 @@ def configureServers() {
     sshagent(['ansible-server-key']) {
         sh "scp -o StrictHostKeyChecking=no ansible/* ec2-user@${ANSIBLE_SERVER}:~/"
 
-        withCredentials([sshUserPrivateKey(
-            credentialsId: 'ansible-server-key',
-            keyFileVariable: 'keyfile',
-            usernameVariable: 'user'
-        )]) {
-        sh 'scp $keyfile ec2-user@$ANSIBLE_SERVER:~/ansible-jenkins.pem'
-        }
+        // withCredentials([sshUserPrivateKey(
+        //     credentialsId: 'ansible-server-key',
+        //     keyFileVariable: 'keyfile',
+        //     usernameVariable: 'user'
+        // )]) {
+        // sh 'scp $keyfile ec2-user@$ANSIBLE_SERVER:~/ansible-jenkins.pem'
+        // }
     }
 
     def remote = [:]
