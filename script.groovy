@@ -34,3 +34,5 @@ def pushImageToECR() {
         sh "docker push $IMAGE_NAME:latest"
     }
 }
+
+return this
