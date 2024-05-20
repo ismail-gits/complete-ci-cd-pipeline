@@ -62,8 +62,8 @@ def provisionServer() {
     echo "Server-1 public ip: $SERVER_PUBLIC_IP_1"
     echo "Server-2 public ip: $SERVER_PUBLIC_IP_2"
 
-    echo "waiting for EC2 server to initialize..."
-    sleep(time: 60, unit: "SECONDS")
+    // echo "waiting for EC2 server to initialize..."
+    // sleep(time: 60, unit: "SECONDS")
 }
 
 def configureServers() {
