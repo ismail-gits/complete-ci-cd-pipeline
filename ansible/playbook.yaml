@@ -1,6 +1,6 @@
 ---
 - name: Make sure docker and docker-compose are installed
-  hosts: aws_ec2
+  hosts: tag_Name_dev_server
   become: true
   become_user: root
   tasks:
@@ -28,7 +28,7 @@
         state: present
 
 - name: Make sure docker is started
-  hosts: aws_ec2
+  hosts: tag_Name_dev_server
   become: true
   become_user: root
   tasks:
@@ -38,7 +38,7 @@
         state: started
 
 - name: Add ec2-user to docker group
-  hosts: aws_ec2
+  hosts: tag_Name_dev_server
   become: true
   become_user: root
   tasks:
@@ -51,7 +51,7 @@
       ansible.builtin.meta: reset_connection
 
 - name: Start docker containers
-  hosts: aws_ec2
+  hosts: tag_Name_dev_server
   vars_files: 
     - playbook-vars.yaml
   tasks:

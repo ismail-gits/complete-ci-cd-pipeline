@@ -13,6 +13,8 @@ provider "aws" {
 
 resource "aws_vpc" "myapp-vpc" {
     cidr_block = var.vpc_cidr_block
+    enable_dns_hostnames = true
+    
     tags = {
         Name: "${var.env_prefix}-vpc"
     }
@@ -116,7 +118,7 @@ resource "aws_instance" "myapp-server-1" {
     key_name = var.private_key_name
 
     tags = {
-        Name: "${var.env_prefix}-server-1"
+        Name: "${var.env_prefix}-server"
     }
 }
 
@@ -132,6 +134,6 @@ resource "aws_instance" "myapp-server-2" {
     key_name = var.private_key_name
 
     tags = {
-        Name: "${var.env_prefix}-server-2"
+        Name: "${var.env_prefix}-server"
     }
 }
