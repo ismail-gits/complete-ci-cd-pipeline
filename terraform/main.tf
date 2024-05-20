@@ -1,10 +1,10 @@
 terraform {
     required_version = ">= 0.12"
-    # backend "s3" {
-    #     bucket = "myapp-java-s3-bucket"
-    #     key = "myapp/state.tfstate"
-    #     region = "ap-south-1"
-    # }
+    backend "s3" {
+        bucket = "nodejs-s3-bucket"
+        key = "nodejs/state.tfstate"
+        region = "ap-south-1"
+    }
 }
 
 provider "aws" {
@@ -100,7 +100,7 @@ data "aws_ami" "latest-amazon-linux-image" {
 }
 
 resource "aws_instance" "myapp-server-1" {
-    ami = "ami-0cc9838aa7ab1dce7"
+    ami = aws_ami.latest-amazon-linux-image
     instance_type = var.instance_type
 
     subnet_id = aws_subnet.myapp-subnet-1.id
