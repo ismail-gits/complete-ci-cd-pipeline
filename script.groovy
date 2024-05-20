@@ -110,7 +110,7 @@ def versionBump() {
     sh "git branch"
 
     withCredentials([usernamePassword(
-        credentialsId: 'ismailGitlab',
+        credentialsId: '<git-credentials>',
         usernameVariable: 'USER',
         passwordVariable: 'PASSWORD'
     )]) {
