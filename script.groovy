@@ -5,7 +5,7 @@ def incrementVersion() {
     sh "git config --global user.name jenkins"
     
     // Increment the version using npm
-    sh "npm version patch --force"
+    // sh "npm version patch --force"
     
     // Read the updated version from package.json
     def version = sh(script: 'cat package.json | jq -r ".version"', returnStdout: true).trim()
