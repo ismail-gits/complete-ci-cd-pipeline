@@ -104,5 +104,18 @@ pipeline {
                 }
             }
         }
+
+        stage('version bump') {
+            when {
+                expression {
+                    BRANCH_NAME == 'main'
+                }
+            }
+            steps {
+                script {
+                    gv.versionBump()
+                }
+            }
+        }
     }
 }
