@@ -56,7 +56,7 @@
     - playbook-vars.yaml
   tasks:
     - name: Copy docker-compose file to remote server
-      ansible.buildin.copy:
+      ansible.builtin.copy:
         src: /var/jenkins_home/workspace/NodeJs-web-application_main/docker-compose.yaml
         dest: /home/ec2-user/docker-compose.yaml
     - name: Docker login to AWS ECR private registry

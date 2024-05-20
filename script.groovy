@@ -90,6 +90,7 @@ def configureServers() {
 
         sshCommand remote: remote, command: "ls -l"
         sshScript remote: remote, script: "prepare-ansible-server.sh"
+        sshCommand remote: remote, command: "ansible-inventory --graph"
         sshCommand remote: remote, command: "ansible-playbook playbook.yaml"
     }
 }
