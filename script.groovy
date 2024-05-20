@@ -103,4 +103,23 @@ def configureServers() {
     }
 }
 
+def versionBump() {
+    echo "committing version update to git repository..."
+
+    sh "git status"
+    sh "git branch"
+
+    withCredentials([usernamePassword(
+        credentialsId: 'ismailGitlab',
+        usernameVariable: 'USER',
+        passwordVariable: 'PASSWORD'
+    )]) {
+        sh "git remote set-url origin https://$USER:$PASSWORD@gitlab.com/ismailGitlab/ci-cd-pipeline"
+    }
+
+    sh "git add ."
+    sh "git commit -m 'jenkins-ci: version bump'"
+    sh "git push origin HEAD:main"
+}
+
 return this
