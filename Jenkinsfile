@@ -10,9 +10,9 @@ pipeline {
     }
 
     environment {
-        DOCKER_REPOSITORY = "590183817498.dkr.ecr.ap-south-1.amazonaws.com"
-        IMAGE_NAME = "590183817498.dkr.ecr.ap-south-1.amazonaws.com/nodejs-app"
-        ANSIBLE_SERVER = "3.108.217.6"
+        DOCKER_REPOSITORY = "<docker-repo>"
+        IMAGE_NAME = "<image-name>"
+        ANSIBLE_SERVER = "<ansible-control-node-server>"
     }
 
     stages {
